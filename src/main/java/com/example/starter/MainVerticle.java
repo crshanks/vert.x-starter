@@ -2,6 +2,7 @@ package com.example.starter;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
+import com.newrelic.api.agent.NewRelic;
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -11,6 +12,7 @@ public class MainVerticle extends AbstractVerticle {
       req.response()
         .putHeader("content-type", "text/plain")
         .end("Hello from Vert.x!");
+        NewRelic.addCustomParameter("userId", "Craig");
     }).listen(8888, http -> {
       if (http.succeeded()) {
         startPromise.complete();
